@@ -52,7 +52,7 @@ class ContactModel extends Model {
       newContact.address = faker.address.streetAddress();
       newContact.zip = faker.address.zipCode();
       newContact.city = faker.address.city();
-      newContact.birthDate = faker.date.time();
+      newContact.birthDate = "19/10/1977";
       newContact.comment = faker.lorem.sentence();
       newContact.isPersonal = faker.randomGenerator.boolean();
       _contactList.add(newContact);
