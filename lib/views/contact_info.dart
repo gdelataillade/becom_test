@@ -1,3 +1,4 @@
+import 'package:becom_test/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -121,6 +122,13 @@ class __FormState extends State<_Form> {
                 ),
                 FormInput("Date de naissance", _contact.birthDate),
                 FormInput("Commentaire", _contact.comment),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Button("Annuler", Colors.red, () {}),
+                    Button("Valider", Colors.green, () {}),
+                  ],
+                ),
               ],
             );
           },
