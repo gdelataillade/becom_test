@@ -22,7 +22,12 @@ class ContactModel extends Model {
   List<Contact> get contactList => _contactList;
   List<Contact> get searchResultsList => _searchResults;
 
-  void updateInfo() {
+  void updateInfo(Contact newContact) {
+    _contactList[selectedContactIndex] = newContact;
+    notifyListeners();
+  }
+
+  void cancelUpdate() {
     notifyListeners();
   }
 

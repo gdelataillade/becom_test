@@ -87,7 +87,23 @@ class _Form extends StatefulWidget {
 }
 
 class __FormState extends State<_Form> {
+  ContactModel _model;
   Contact _contact;
+
+  void _changeName(String newValue) => _contact.name = newValue;
+  void _changePhone(String newValue) => _contact.phone = newValue;
+  void _changeEmail(String newValue) => _contact.email = newValue;
+  void _changeAddress(String newValue) => _contact.address = newValue;
+  void _changeZip(String newValue) => _contact.zip = newValue;
+  void _changeCity(String newValue) => _contact.city = newValue;
+  void _changeBirthDate(String newValue) => _contact.birthDate = newValue;
+  void _changeComment(String newValue) => _contact.comment = newValue;
+
+  void _cancelUpdate() {
+    setState(() {
+      _contact = _model.contactList[_model.selectedContactIndex];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,32 +117,68 @@ class __FormState extends State<_Form> {
         ),
         child: ScopedModelDescendant<ContactModel>(
           builder: (context, child, model) {
+            _model = model;
             _contact = model.contactList[model.selectedContactIndex];
-            print(model.selectedContactIndex);
-            print(_contact.name);
             return Column(
               children: <Widget>[
-                FormInput("Nom", _contact.name),
+                FormInput(
+                  "Nom",
+                  _contact.name,
+                  _changeName,
+                ),
                 Row(
                   children: <Widget>[
-                    Expanded(child: FormInput("Téléphone", _contact.phone)),
-                    Expanded(child: FormInput("Email", _contact.email)),
+                    Expanded(
+                        child: FormInput(
+                      "Téléphone",
+                      _contact.phone,
+                      _changePhone,
+                    )),
+                    Expanded(
+                        child: FormInput(
+                      "Email",
+                      _contact.email,
+                      _changeEmail,
+                    )),
                   ],
                 ),
-                FormInput("Adresse de facturation", _contact.address),
+                FormInput(
+                  "Adresse de facturation",
+                  _contact.address,
+                  _changeAddress,
+                ),
                 Row(
                   children: <Widget>[
-                    Expanded(child: FormInput("Code postal", _contact.zip)),
-                    Expanded(child: FormInput("Ville", _contact.city)),
+                    Expanded(
+                        child: FormInput(
+                      "Code postal",
+                      _contact.zip,
+                      _changeZip,
+                    )),
+                    Expanded(
+                        child: FormInput(
+                      "Ville",
+                      _contact.city,
+                      _changeCity,
+                    )),
                   ],
                 ),
-                FormInput("Date de naissance", _contact.birthDate),
-                FormInput("Commentaire", _contact.comment),
+                FormInput(
+                  "Date de naissance",
+                  _contact.birthDate,
+                  _changeBirthDate,
+                ),
+                FormInput(
+                  "Commentaire",
+                  _contact.comment,
+                  _changeComment,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    Button("Annuler", Colors.red, () {}),
-                    Button("Valider", Colors.green, () {}),
+                    Button("Annuler", Colors.red, () => _cancelUpdate()),
+                    Button("Valider", Colors.green,
+                        () => model.updateInfo(_contact)),
                   ],
                 ),
               ],
@@ -141,8 +193,9 @@ class __FormState extends State<_Form> {
 class FormInput extends StatefulWidget {
   final String label;
   final String value;
+  final Function(String) callback;
 
-  const FormInput(this.label, this.value);
+  const FormInput(this.label, this.value, this.callback);
 
   @override
   _FormInputState createState() => _FormInputState();
@@ -150,6 +203,11 @@ class FormInput extends StatefulWidget {
 
 class _FormInputState extends State<FormInput> {
   TextEditingController _controller;
+
+  void _initController() {
+    _controller = TextEditingController(text: widget.value);
+    _controller.addListener(() => widget.callback(_controller.text));
+  }
 
   @override
   void dispose() {
@@ -159,7 +217,7 @@ class _FormInputState extends State<FormInput> {
 
   @override
   Widget build(BuildContext context) {
-    _controller = TextEditingController(text: widget.value);
+    _initController();
     return Padding(
       padding: const EdgeInsets.all(8),
       child: TextField(
