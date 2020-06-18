@@ -18,14 +18,14 @@ class _ButtonState extends State<Button> {
       padding: const EdgeInsets.all(8.0),
       child: RaisedButton(
         onPressed: widget.callback,
-        color: Colors.green,
+        color: widget.color,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         child: Container(
           width: 110,
           height: 50,
           child: Center(
             child: Text(
-              "Valider",
+              widget.text,
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.white,
