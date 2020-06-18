@@ -21,6 +21,15 @@ class _ContactListState extends State<ContactList> {
         margin: const EdgeInsets.only(top: 20, left: 15, right: 15),
         decoration: BoxDecoration(
           color: Colors.white,
+          borderRadius: BorderRadius.only(topRight: Radius.circular(15)),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(10, 10, 10, 0.5),
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: Offset(0.5, 0.5),
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +56,7 @@ class __SearchBarState extends State<_SearchBar> {
       height: 40,
       width: MediaQuery.of(context).size.width * 0.3,
       decoration: BoxDecoration(
-        color: Colors.grey,
+        color: Color.fromRGBO(245, 246, 250, 1),
         borderRadius: BorderRadius.all(const Radius.circular(30)),
       ),
       padding: const EdgeInsets.only(left: 15, bottom: 7),
@@ -61,11 +70,11 @@ class __SearchBarState extends State<_SearchBar> {
                   : model.isSearching = false;
             },
             autocorrect: false,
-            cursorColor: Colors.white,
+            cursorColor: Colors.grey,
             decoration: InputDecoration(
               suffixIcon: Padding(
                 padding: const EdgeInsets.only(top: 8),
-                child: Icon(Icons.search, color: Colors.white),
+                child: Icon(Icons.search, color: Colors.grey),
               ),
               border: InputBorder.none,
             ),

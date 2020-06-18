@@ -15,6 +15,7 @@ class _ContactInfoState extends State<ContactInfo> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width * 0.65,
+      color: Color.fromRGBO(245, 246, 250, 1),
       child: Column(
         children: <Widget>[
           _Header(),
