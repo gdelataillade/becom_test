@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+
+import 'package:becom_test/models/contact.dart';
 
 class ContactList extends StatefulWidget {
   @override
@@ -56,9 +59,44 @@ class _ItemsList extends StatefulWidget {
 class __ItemsListState extends State<_ItemsList> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: Colors.brown,
+    return ScopedModelDescendant<ContactModel>(
+      builder: (context, child, model) {
+        return Expanded(
+          child: ListView.separated(
+            separatorBuilder: (context, index) => Divider(color: Colors.grey),
+            itemCount: model.contactList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _ItemCard(model.contactList[index]);
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _ItemCard extends StatefulWidget {
+  final Contact contact;
+
+  const _ItemCard(this.contact);
+
+  @override
+  __ItemCardState createState() => __ItemCardState();
+}
+
+class __ItemCardState extends State<_ItemCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 40,
+      margin: const EdgeInsets.only(left: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(widget.contact.name),
+          Text(widget.contact.phone),
+        ],
       ),
     );
   }

@@ -10,10 +10,14 @@ class Contact {
   String city;
   String birthDate;
   String comment;
+  bool isPersonal;
 }
 
 class ContactModel extends Model {
   List<Contact> _contactList = [];
+  int selectedContactIndex = 0;
+
+  List<Contact> get contactList => _contactList;
 
   void _initContacts() {
     Faker faker = Faker();
@@ -30,6 +34,7 @@ class ContactModel extends Model {
       newContact.city = faker.address.city();
       newContact.birthDate = faker.date.time();
       newContact.comment = faker.lorem.sentence();
+      newContact.isPersonal = faker.randomGenerator.boolean();
       _contactList.add(newContact);
     }
   }
