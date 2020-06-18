@@ -164,9 +164,7 @@ class __ItemCardState extends State<_ItemCard> {
                 ),
               ),
               const SizedBox(height: 5),
-              Text(
-                widget.contact.phone,
-              ),
+              Text(widget.contact.phone),
             ],
           ),
         ],

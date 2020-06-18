@@ -62,6 +62,7 @@ class ContactModel extends Model {
       newContact.isPersonal = faker.randomGenerator.boolean();
       _contactList.add(newContact);
     }
+    _contactList.sort((a, b) => a.name.compareTo(b.name));
   }
 
   ContactModel() {
