@@ -51,16 +51,26 @@ class __SearchBarState extends State<_SearchBar> {
         borderRadius: BorderRadius.all(const Radius.circular(30)),
       ),
       padding: const EdgeInsets.only(left: 15, bottom: 7),
-      child: TextField(
-        autocorrect: false,
-        cursorColor: Colors.white,
-        decoration: InputDecoration(
-          suffixIcon: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Icon(Icons.search, color: Colors.white),
-          ),
-          border: InputBorder.none,
-        ),
+      child: ScopedModelDescendant<ContactModel>(
+        builder: (context, child, model) {
+          return TextField(
+            onChanged: (newInput) {
+              model.updateSearch(newInput);
+              newInput.length > 0
+                  ? model.isSearching = true
+                  : model.isSearching = false;
+            },
+            autocorrect: false,
+            cursorColor: Colors.white,
+            decoration: InputDecoration(
+              suffixIcon: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Icon(Icons.search, color: Colors.white),
+              ),
+              border: InputBorder.none,
+            ),
+          );
+        },
       ),
     );
   }
@@ -76,14 +86,21 @@ class __ItemsListState extends State<_ItemsList> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ContactModel>(
       builder: (context, child, model) {
+        print("Build contact list");
+        if (model.isSearching && model.searchResultsList.length == 0)
+          return Center(child: Text("Aucun résultats"));
         return Expanded(
           child: ListView.separated(
             separatorBuilder: (context, index) => Divider(color: Colors.grey),
-            itemCount: model.contactList.length,
+            itemCount: model.isSearching
+                ? model.searchResultsList.length
+                : model.contactList.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () => model.selectContact(index),
-                child: _ItemCard(model.contactList[index]),
+                child: _ItemCard(model.isSearching
+                    ? model.searchResultsList[index]
+                    : model.contactList[index]),
               );
             },
           ),

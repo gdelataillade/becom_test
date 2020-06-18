@@ -15,9 +15,12 @@ class Contact {
 
 class ContactModel extends Model {
   List<Contact> _contactList = [];
+  List<Contact> _searchResults = [];
   int selectedContactIndex = 0;
+  bool isSearching = false;
 
   List<Contact> get contactList => _contactList;
+  List<Contact> get searchResultsList => _searchResults;
 
   void updateInfo() {
     notifyListeners();
@@ -28,8 +31,10 @@ class ContactModel extends Model {
     notifyListeners();
   }
 
-  List<Contact> searchContact(String input) {
-    return _contactList.where((contact) => contact.name == input).toList();
+  void updateSearch(String newInput) {
+    _searchResults =
+        _contactList.where((contact) => contact.name == newInput).toList();
+    notifyListeners();
   }
 
   void _initContacts() {
