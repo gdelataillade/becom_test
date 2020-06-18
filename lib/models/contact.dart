@@ -19,6 +19,11 @@ class ContactModel extends Model {
 
   List<Contact> get contactList => _contactList;
 
+  void selectContact(int index) {
+    selectedContactIndex = index;
+    notifyListeners();
+  }
+
   void _initContacts() {
     Faker faker = Faker();
     int contactsNb = 50;
