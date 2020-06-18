@@ -46,6 +46,7 @@ class __HeaderState extends State<_Header> {
             color: Colors.blueAccent,
             fontWeight: FontWeight.bold,
             fontSize: 20,
+            decoration: TextDecoration.underline,
           ),
         ),
       ),
