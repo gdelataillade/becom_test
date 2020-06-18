@@ -32,8 +32,10 @@ class ContactModel extends Model {
   }
 
   void updateSearch(String newInput) {
-    _searchResults =
-        _contactList.where((contact) => contact.name == newInput).toList();
+    _searchResults = _contactList
+        .where((contact) =>
+            contact.name.toLowerCase().contains(newInput.toLowerCase()))
+        .toList();
     notifyListeners();
   }
 
