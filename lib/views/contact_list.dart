@@ -50,6 +50,18 @@ class __SearchBarState extends State<_SearchBar> {
         color: Colors.grey,
         borderRadius: BorderRadius.all(const Radius.circular(30)),
       ),
+      padding: const EdgeInsets.only(left: 15, bottom: 7),
+      child: TextField(
+        autocorrect: false,
+        cursorColor: Colors.white,
+        decoration: InputDecoration(
+          suffixIcon: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Icon(Icons.search, color: Colors.white),
+          ),
+          border: InputBorder.none,
+        ),
+      ),
     );
   }
 }
