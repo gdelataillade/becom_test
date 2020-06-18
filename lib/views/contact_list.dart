@@ -111,7 +111,11 @@ class __ItemsListState extends State<_ItemsList> {
           return Center(child: Text("Aucun résultats"));
         return Expanded(
           child: ListView.separated(
-            separatorBuilder: (context, index) => Divider(color: Colors.grey),
+            separatorBuilder: (context, index) => Padding(
+              padding:
+                  const EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 5),
+              child: Divider(color: Colors.grey),
+            ),
             itemCount: model.isSearching
                 ? model.searchResultsList.length
                 : model.contactList.length,
@@ -143,14 +147,28 @@ class __ItemCardState extends State<_ItemCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 45,
       margin: const EdgeInsets.only(left: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
         children: <Widget>[
-          Text(widget.contact.name),
-          Text(widget.contact.phone),
+          Icon(widget.contact.isPersonal ? Icons.person : Icons.business),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                widget.contact.name,
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                widget.contact.phone,
+              ),
+            ],
+          ),
         ],
       ),
     );
