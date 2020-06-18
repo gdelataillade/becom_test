@@ -28,6 +28,10 @@ class ContactModel extends Model {
     notifyListeners();
   }
 
+  List<Contact> searchContact(String input) {
+    return _contactList.where((contact) => contact.name == input).toList();
+  }
+
   void _initContacts() {
     Faker faker = Faker();
     int contactsNb = 50;

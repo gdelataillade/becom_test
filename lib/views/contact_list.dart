@@ -18,7 +18,7 @@ class _ContactListState extends State<ContactList> {
       child: Container(
         height: 50,
         width: 50,
-        margin: const EdgeInsets.only(top: 10, left: 15, right: 15),
+        margin: const EdgeInsets.only(top: 20, left: 15, right: 15),
         decoration: BoxDecoration(
           color: Colors.white,
         ),
@@ -44,9 +44,12 @@ class __SearchBarState extends State<_SearchBar> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
-      color: Colors.grey,
-      height: 50,
+      height: 40,
       width: MediaQuery.of(context).size.width * 0.3,
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.all(const Radius.circular(30)),
+      ),
     );
   }
 }
