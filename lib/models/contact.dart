@@ -32,7 +32,14 @@ class ContactModel extends Model {
   }
 
   void selectContact(int index) {
-    selectedContactIndex = index;
+    if (isSearching) {
+      Contact _contact = _searchResults[index];
+
+      for (var i = 0; i < _contactList.length; i++) {
+        if (_contact.name == _contactList[i].name) selectedContactIndex = i;
+      }
+    } else
+      selectedContactIndex = index;
     notifyListeners();
   }
 
