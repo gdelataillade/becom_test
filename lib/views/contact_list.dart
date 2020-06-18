@@ -14,11 +14,22 @@ class _ContactListState extends State<ContactList> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width * 0.35,
-      color: Colors.blue,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment
+              .bottomLeft, // 10% of the width, so there are ten blinds.
+          colors: [
+            Color.fromRGBO(44, 61, 152, 1),
+            Color.fromRGBO(48, 116, 206, 1),
+          ],
+          tileMode: TileMode.repeated, // repeats the gradient over the canvas
+        ),
+      ),
       child: Container(
         height: 50,
         width: 50,
-        margin: const EdgeInsets.only(top: 20, left: 15, right: 15),
+        margin: const EdgeInsets.only(top: 25, left: 15, right: 15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(topRight: Radius.circular(15)),
