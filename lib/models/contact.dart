@@ -27,9 +27,7 @@ class ContactModel extends Model {
     notifyListeners();
   }
 
-  void cancelUpdate() {
-    notifyListeners();
-  }
+  void cancelUpdate() => notifyListeners();
 
   void selectContact(int index) {
     if (isSearching) {

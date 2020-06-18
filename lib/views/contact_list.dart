@@ -18,13 +18,12 @@ class _ContactListState extends State<ContactList> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topRight,
-          end: Alignment
-              .bottomLeft, // 10% of the width, so there are ten blinds.
+          end: Alignment.bottomLeft,
           colors: [
             Color.fromRGBO(44, 61, 152, 1),
             Color.fromRGBO(48, 116, 206, 1),
           ],
-          tileMode: TileMode.repeated, // repeats the gradient over the canvas
+          tileMode: TileMode.repeated,
         ),
       ),
       child: Container(
