@@ -11,6 +11,6 @@ class Contact {
   String _comment;
 }
 
-class ContactsModel extends Model {
+class ContactModel extends Model {
   List<Contact> _contactList = [];
 }
