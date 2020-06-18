@@ -66,7 +66,10 @@ class __ItemsListState extends State<_ItemsList> {
             separatorBuilder: (context, index) => Divider(color: Colors.grey),
             itemCount: model.contactList.length,
             itemBuilder: (BuildContext context, int index) {
-              return _ItemCard(model.contactList[index]);
+              return GestureDetector(
+                onTap: () => model.selectContact(index),
+                child: _ItemCard(model.contactList[index]),
+              );
             },
           ),
         );

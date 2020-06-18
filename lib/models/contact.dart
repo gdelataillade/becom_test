@@ -19,6 +19,10 @@ class ContactModel extends Model {
 
   List<Contact> get contactList => _contactList;
 
+  void updateInfo() {
+    notifyListeners();
+  }
+
   void selectContact(int index) {
     selectedContactIndex = index;
     notifyListeners();
