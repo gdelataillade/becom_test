@@ -61,24 +61,47 @@ class _ContactType extends StatefulWidget {
 }
 
 class __ContactTypeState extends State<_ContactType> {
+  Contact _contact;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 100, top: 20),
-      child: Row(
-        children: <Widget>[
-          Row(
+    return ScopedModelDescendant<ContactModel>(
+      builder: (context, child, model) {
+        _contact = model.contactList[model.selectedContactIndex];
+        return Container(
+          padding: const EdgeInsets.only(left: 100, top: 20),
+          child: Row(
             children: <Widget>[
-              Icon(Icons.person, color: Colors.blue),
+              Row(
+                children: <Widget>[
+                  Checkbox(
+                    value: _contact.isPersonal,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _contact.isPersonal = value;
+                      });
+                    },
+                  ),
+                  Icon(Icons.person, color: Colors.blue, size: 35),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Checkbox(
+                    value: !_contact.isPersonal,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _contact.isPersonal = !value;
+                      });
+                    },
+                  ),
+                  Icon(Icons.business, color: Colors.blue, size: 35),
+                ],
+              ),
             ],
           ),
-          Row(
-            children: <Widget>[
-              Icon(Icons.business, color: Colors.blue),
-            ],
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
